@@ -3,19 +3,30 @@ from django.db import models
 
 class Home(models.Model):
 
-    nombre = models.CharField(max_length=40)
+    nombre = models.CharField(max_length=30)
 
 
 class Usuario(models.Model):
 
-    nombre= models.CharField(max_lenght=30)
-    apellido= models.CharField(max_lenght=30)
-    email= models.EmailField()
+    id = models.AutoField(primary_key=True)
+    created = models.DateTimeField(auto_now_add=True)
+    nombre = models.CharField(max_length=30)
+    apellido = models.CharField(max_length=30)
+    email = models.EmailField()
+
 
 class Solicitud(models.Model):
 
-    cantidad= models.IntegerField()
+    id = models.AutoField(primary_key=True)
+    created = models.DateTimeField(auto_now_add=True)
+    nombre_solicitud = models.CharField(max_length=50)
+    cantidad = models.IntegerField()
+
 
 class Direcciones(models.Model):
 
-    nombre_pila=
+    id = models.AutoField(primary_key=True)
+    created = models.DateTimeField(auto_now_add=True)
+    calle = models.CharField(max_length=30)
+    numero = models.CharField(max_length=30)
+    ciudad = models.CharField(max_length=30)
