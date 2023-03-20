@@ -20,10 +20,10 @@ DOCTYPE html>
     <!-- page navbar -->
     <nav class="page-navbar affix-top" data-spy="affix" data-offset-top="10">
         <ul class="nav-navbar container">
-            <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Compradores</a></li>
-            <li class="nav-item"><a href="#" class="nav-link"><img src="{% static 'AppWeb/assets/imgs/Agrocompra-Isotipo.png' %}" alt="Download"></a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Conócenos</a></li>
+            <li class="nav-item"><a href="/usuarios" class="nav-link">Usuarios</a></li>
+            <li class="nav-item"><a href="/direcciones#" class="nav-link">Direcciones</a></li>
+            <li class="nav-item"><a href="/home" class="nav-link"><img src="{% static 'AppWeb/assets/imgs/Agrocompra-Isotipo1.png' %}" alt="Download"></a></li>
+            <li class="nav-item"><a href="/solicitudes" class="nav-link">Solicitudes</a></li>
             <li class="nav-item search">
                 <a href="javascript:void(0)" class="nav-link search-toggle"><i class="ti-search"></i> Search</a>
                 <div class="search-wrapper">
@@ -39,22 +39,21 @@ DOCTYPE html>
     <!-- page container -->
      <div>
         <div class="col-md-10 col-lg-8 m-auto">
-            <h6 class="title mb-4 mt-5 pt-5">Formulario de Direcciones</h6>
-            <p class="mb-5">2do formulario.</p>
+            <h6 class="title mb-4 mt-5 pt-5">Formulario de Solicitudes de hielo</h6>
+            <p class="mb-5">3er formulario.</p>
             {% block contenido_cambia %}
-                <form action="{% url 'AppWebDirecciones' %}" method="post">
+                <form action="{% url 'AppWebSolicitudes' %}" method="post">
                     {% csrf_token %}
                     {{ form.as_p }}
                     <input type="submit" value="Enviar">
                 </form>
-                {% if direcciones1 %}
-                    {% for direccion in direcciones %}
-                        <P>calle: {{ direccion.calle }}</P>
-                        <P>numero: {{ direccion.numero }}</P>
-                        <P>ciudad: {{ direccion.ciudad }}</P>
+                {% if solicitudes %}
+                    {% for solicitud in solicitudes %}
+                        <P>nombre_solicitud: {{ solicitud.nombre_solicitud }}</P>
+                        <P>cantidad [kg]: {{ solicitud.cantidad }}</P>
                     {% endfor %}
                 {% else %}
-                    <h1>No hay direcciones en el momento</h1>
+                    <h1>No hay solicitudes en el momento</h1>
                 {% endif %}
             {% endblock %}
         </div>

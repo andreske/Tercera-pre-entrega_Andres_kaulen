@@ -2,8 +2,7 @@ from django.db import models
 
 
 class Home(models.Model):
-
-    nombre = models.CharField(max_length=30)
+    pass
 
 
 class Usuario(models.Model):
@@ -14,6 +13,18 @@ class Usuario(models.Model):
     apellido = models.CharField(max_length=30)
     email = models.EmailField()
 
+    def __str__(selfself):
+        return f"Usuario: {self.nombre}, Apellido: {self.apellido}"
+
+
+class Direccion(models.Model):
+
+    id = models.AutoField(primary_key=True)
+    created = models.DateTimeField(auto_now_add=True)
+    calle = models.CharField(max_length=30)
+    numero = models.IntegerField()
+    ciudad = models.CharField(max_length=30)
+
 
 class Solicitud(models.Model):
 
@@ -22,11 +33,3 @@ class Solicitud(models.Model):
     nombre_solicitud = models.CharField(max_length=50)
     cantidad = models.IntegerField()
 
-
-class Direcciones(models.Model):
-
-    id = models.AutoField(primary_key=True)
-    created = models.DateTimeField(auto_now_add=True)
-    calle = models.CharField(max_length=30)
-    numero = models.CharField(max_length=30)
-    ciudad = models.CharField(max_length=30)

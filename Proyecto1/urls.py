@@ -17,9 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from AppWeb.views import home
+from AppWeb.views import home, usuarios, direcciones, solicitudes, busqueda_usuario
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', home),
+    path('home/', home, name="AppWebHome"),
+    path('usuarios/', usuarios, name="AppWebUsuarios"),
+    path('buscar_usuario/', busqueda_usuario, name="AppWebBuscarUsuario"),
+    path('direcciones/', direcciones, name="AppWebDirecciones"),
+    path('solicitudes/', solicitudes, name="AppWebSolicitudes"),
 ]
