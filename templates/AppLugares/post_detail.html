@@ -6,15 +6,28 @@
 <!-- page header -->
     <header class="header">
         <div class="overlay"></div>
+        <div class="header-content">
+            <h1>{{post.lugar}}</h1>
+        </div>
     </header><!-- end of page header -->
 
-    <div class="container p-4">
-        <h2>{{post.lugar}}</h2>
-        <h6>{{post.created}}</h6>
-        <p>{{post.descripcion}}</p>
-        <img src="{{post.imagen.url}}" alt="{{post.lugar}}">
-        <a href="{{post.url}}">"Ver mas"</a>
+</div>
 
+
+<div class="container p-4">
+    <div class="card card-body">
+        <div class="row">
+            <div class="col-3">
+                <img src="{{post.imagen.url}}" alt="{{post.lugar}}" class="img-fluid">
+            </div>
+            <div class="col-9">
+                <h6>{{post.created}}</h6>
+                <p>{{post.descripcion}}</p>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h4> Comentarios: </h4>
     </div>
 
 </div>

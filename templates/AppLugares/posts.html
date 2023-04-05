@@ -8,23 +8,35 @@
         <div class="overlay"></div>
         <div class="header-content">
             <h1 class="header-title">Posts</h1>
-
-
+            <p>Acá puedes ver todos los lugares que están posteados dentro del sitio web.</p>
 
         </div>
     </header><!-- end of page header -->
 </div>
-    <div class="container p-4">
-        {% for post in posts %}
 
-            <h2>{{post.lugar|upper}}</h2>
-            <h6>{{post.created}}</h6>
-            <p>{{post.descripcion|truncatechars:100}}</p>
-            <img src="{{post.imagen.url}}" alt="{{post.lugar}}">
-            <a href="{% url 'AppLugares:post_detail' post.id %}">"Ver mas"</a>
+{% for post in posts %}
 
-        {% endfor %}
+<div class="container p-4">
+
+    <div class="card card-body">
+        <div class="row">
+            <div class="col-3">
+                <img src="{{post.imagen.url}}" alt="{{post.lugar}}" class="img-fluid">
+            </div>
+
+            <div class="col-9">
+                <h2>{{post.lugar|upper}}</h2>
+                <h6>{{post.created}}</h6>
+                <p>{{post.descripcion|truncatechars:100}}</p>
+
+                <a class="btn btn-primary btn-sm" href="{% url 'AppLugares:post_detail' post.id %}">"Ver mas"</a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+{% endfor %}
 
 {% endblock %}
-
 
