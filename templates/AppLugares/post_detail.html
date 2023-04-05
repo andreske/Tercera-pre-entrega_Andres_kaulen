@@ -6,12 +6,17 @@
 <!-- page header -->
     <header class="header">
         <div class="overlay"></div>
-        <div class="header-content">
-            <h1 class="header-title">Post Detail</h1>
-            <p>{{post}}</p>
-
-        </div>
     </header><!-- end of page header -->
+
+    <div class="container p-4">
+        <h2>{{post.lugar}}</h2>
+        <h6>{{post.created}}</h6>
+        <p>{{post.descripcion}}</p>
+        <img src="{{post.imagen.url}}" alt="{{post.lugar}}">
+        <a href="{{post.url}}">"Ver mas"</a>
+
+    </div>
+
 </div>
 
 {% endblock %}

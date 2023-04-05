@@ -14,16 +14,16 @@
         </div>
     </header><!-- end of page header -->
 </div>
+    <div class="container p-4">
+        {% for post in posts %}
 
-{% for post in posts %}
+            <h2>{{post.lugar|upper}}</h2>
+            <h6>{{post.created}}</h6>
+            <p>{{post.descripcion|truncatechars:100}}</p>
+            <img src="{{post.imagen.url}}" alt="{{post.lugar}}">
+            <a href="{% url 'AppLugares:post_detail' post.id %}">"Ver mas"</a>
 
-    <h2>{{post.lugar}}</h2>
-    <h6>{{post.created}}</h6>
-    <p>{{post.descripcion}}</p>
-    <img src="{{post.imagen.url}}" alt="{{post.lugar}}">
-    <a href="{{post.url}}">"Ver mas"</a>
-
-{% endfor %}
+        {% endfor %}
 
 {% endblock %}
 
