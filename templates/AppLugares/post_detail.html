@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block contenido_cambia %}
+{% load static %}
+
+<div>
+<!-- page header -->
+    <header class="header">
+        <div class="overlay"></div>
+        <div class="header-content">
+            <h1 class="header-title">Post Detail</h1>
+            <p>{{post}}</p>
+
+        </div>
+    </header><!-- end of page header -->
+</div>
+
+{% endblock %}

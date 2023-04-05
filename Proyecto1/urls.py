@@ -15,16 +15,20 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
-
-from AppWeb.views import home, usuarios, direcciones, solicitudes, busqueda_usuario
-
+from django.urls import path, include
+from AppWeb.views import home, busqueda_usuario, login_request, base, about
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('base/', base, name="AppWebBase"),
+    path('about/', about, name="AppWebAbout"),
     path('home/', home, name="AppWebHome"),
-    path('usuarios/', usuarios, name="AppWebUsuarios"),
     path('buscar_usuario/', busqueda_usuario, name="AppWebBuscarUsuario"),
-    path('direcciones/', direcciones, name="AppWebDirecciones"),
-    path('solicitudes/', solicitudes, name="AppWebSolicitudes"),
+    path('login/', login_request, name="Login"),
+    path('AppLugares/', include('AppLugares.urls'))
+
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

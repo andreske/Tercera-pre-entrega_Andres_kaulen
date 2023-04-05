@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block contenido_cambia %}
+{% load static %}
+
+<div>
+<!-- page header -->
+    <header class="header">
+        <div class="overlay"></div>
+        <div class="header-content">
+            <h1 class="header-title">Posts</h1>
+
+
+
+        </div>
+    </header><!-- end of page header -->
+</div>
+
+{% for post in posts %}
+
+    <h2>{{post.lugar}}</h2>
+    <h6>{{post.created}}</h6>
+    <p>{{post.descripcion}}</p>
+    <img src="{{post.imagen.url}}" alt="{{post.lugar}}">
+    <a href="{{post.url}}">"Ver mas"</a>
+
+{% endfor %}
+
+{% endblock %}
+
+

@@ -5,6 +5,10 @@ class Home(models.Model):
     pass
 
 
+class About(models.Model):
+    pass
+
+
 class Usuario(models.Model):
 
     id = models.AutoField(primary_key=True)
@@ -13,23 +17,7 @@ class Usuario(models.Model):
     apellido = models.CharField(max_length=30)
     email = models.EmailField()
 
-    def __str__(selfself):
+    def __str__(self):
         return f"Usuario: {self.nombre}, Apellido: {self.apellido}"
 
-
-class Direccion(models.Model):
-
-    id = models.AutoField(primary_key=True)
-    created = models.DateTimeField(auto_now_add=True)
-    calle = models.CharField(max_length=30)
-    numero = models.IntegerField()
-    ciudad = models.CharField(max_length=30)
-
-
-class Solicitud(models.Model):
-
-    id = models.AutoField(primary_key=True)
-    created = models.DateTimeField(auto_now_add=True)
-    nombre_solicitud = models.CharField(max_length=50)
-    cantidad = models.IntegerField()
 

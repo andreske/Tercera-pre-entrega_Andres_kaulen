@@ -1,4 +1,4 @@
-DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     {% load static %}
@@ -20,10 +20,9 @@ DOCTYPE html>
     <!-- page navbar -->
     <nav class="page-navbar affix-top" data-spy="affix" data-offset-top="10">
         <ul class="nav-navbar container">
-            <li class="nav-item"><a href="/usuarios" class="nav-link">Usuarios</a></li>
-            <li class="nav-item"><a href="/direcciones#" class="nav-link">Direcciones</a></li>
-            <li class="nav-item"><a href="/home" class="nav-link"><img src="{% static 'AppWeb/assets/imgs/Agrocompra-Isotipo1.png' %}" alt="Download"></a></li>
-            <li class="nav-item"><a href="/solicitudes" class="nav-link">Solicitudes</a></li>
+            <li class="nav-item"><a href="/home" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="/AppLugares" class="nav-link">Lugares</a></li>
+            <li class="nav-item"><a href="/about" class="nav-link">about</a></li>
             <li class="nav-item search">
                 <a href="javascript:void(0)" class="nav-link search-toggle"><i class="ti-search"></i> Search</a>
                 <div class="search-wrapper">
@@ -35,40 +34,22 @@ DOCTYPE html>
         </ul>
     </nav><!-- end of page navbar -->
 
+    <!-- Body -->
+    {% block contenido_cambia %}
+        <h1>No se encuentra contenido disponible</h1>
+    {% endblock %}
 
-    <!-- page container -->
-     <div>
-        <div class="col-md-10 col-lg-8 m-auto">
-            <h6 class="title mb-4 mt-5 pt-5">Formulario de Direcciones</h6>
-            <p class="mb-5">2do formulario.</p>
-            {% block contenido_cambia %}
-                <form action="{% url 'AppWebDirecciones' %}" method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <input type="submit" value="Enviar">
-                </form>
-                {% if direccion %}
-                    {% for direccion in direcciones %}
-                        <P>calle: {{ direccion.calle }}</P>
-                        <P>numero: {{ direccion.numero }}</P>
-                        <P>ciudad: {{ direccion.ciudad }}</P>
-                    {% endfor %}
-                {% else %}
-                    <h1>No hay direcciones en el momento</h1>
-                {% endif %}
-            {% endblock %}
-        </div>
-    </div> <!-- end of page container -->
 
     <!--footer & pre footer -->
     <div class="contact-section">
         <div class="overlay"></div>
         <!-- container -->
+        <div class="container">
 
             <!-- footer -->
             <footer class="footer">
-                <p class="infos">&copy; Hecho para la clase de Coder</i> </a></p>
-                <span>|</span>
+                <p class="infos">&copy; <script>document.write(new Date().getFullYear())</script>, Made with <i class="ti-heart text-danger"></i> by <a href="http://www.devcrud.com">DevCRUD</a></p>       
+                <span>|</span>  
                 <div class="links">
                     <a href="#">About</a>
                     <a href="#">Explore</a>
@@ -90,3 +71,4 @@ DOCTYPE html>
     <script src="{% static 'AppWeb/assets/js/dorang.js' %}"></script>
 
 </body>
+</html>

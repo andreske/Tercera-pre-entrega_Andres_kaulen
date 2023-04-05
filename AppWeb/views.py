@@ -1,10 +1,20 @@
 from django.shortcuts import render
-from AppWeb.models import Usuario, Direccion, Solicitud
-from AppWeb.forms import UsuarioForm, DireccionForm, SolicitudForm, BusquedaUsuarioForm
+from AppWeb.models import Usuario
+from AppWeb.forms import UsuarioForm, BusquedaUsuarioForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login, logout, authenticate
 
 
 def home(request):
-    return render(request, "index.html")
+    return render(request, "AppWeb/home.html")
+
+
+def base(request):
+    return render(request, "base.html")
+
+
+def about(request):
+    return render(request, "AppWeb/about.html")
 
 
 def usuarios(request):
@@ -26,7 +36,7 @@ def usuarios(request):
         "form": UsuarioForm(),
         "form_busqueda": BusquedaUsuarioForm(),
     }
-    return render(request, "AppWeb/usuarios.html", context=context)
+    return render(request, "AppWeb/about.html", context=context)
 
 
 def busqueda_usuario(request):
@@ -41,42 +51,26 @@ def busqueda_usuario(request):
         return render(request, "AppWeb/busqueda_usuario.html", context=context)
 
 
-def direcciones(request):
-    if request.method == "POST":
-        mi_formulario = DireccionForm(request.POST)
+def login_request(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
 
-        if mi_formulario.is_valid():
-            informacion = mi_formulario.cleaned_data
-            direccion_save = Direccion(
-                calle=informacion['calle'],
-                numero=informacion['numero'],
-                ciudad=informacion['ciudad']
-            )
-            direccion_save.save()
+        if form.is_valid():  # Si pasó la validación de Django
 
-    all_direcciones = Direccion.objects.all()
-    context = {
-        "direcciones": all_direcciones,
-        "form": DireccionForm()
-    }
-    return render(request, "AppWeb/direcciones.html", context=context)
+            usuario = form.cleaned_data.get('username')
+            contrasenia = form.cleaned_data.get('password')
 
+            user = authenticate(username=usuario, password=contrasenia)
 
-def solicitudes(request):
-    if request.method == "POST":
-        mi_formulario = SolicitudForm(request.POST)
+            if user is not None:
+                login(request, user)
 
-        if mi_formulario.is_valid():
-            informacion = mi_formulario.cleaned_data
-            solicitud_save = Solicitud(
-                nombre_solicitud=informacion['nombre_solicitud'],
-                cantidad=informacion['cantidad']
-            )
-            solicitud_save.save()
+                return render(request, "AppWeb/inicio.html", {"mensaje": f"Bienvenido {usuario}"})
+            else:
+                return render(request, "AppWeb/inicio.html", {"mensaje": "Datos incorrectos"})
+        else:
+            return render(request, "AppWeb/inicio.html", {"mensaje": "Formulario erroneo"})
+    form = AuthenticationForm()
 
-    all_solicitudes = Solicitud.objects.all()
-    context = {
-        "solicitudes": all_solicitudes,
-        "form": SolicitudForm()
-    }
-    return render(request, "AppWeb/solicitudes.html", context=context)
+    return render(request, "AppWeb/login.html", {"form": form})
+
