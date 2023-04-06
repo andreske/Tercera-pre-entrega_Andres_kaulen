@@ -52,11 +52,11 @@ def login_request(request):
             if user is not None:
                 login(request, user)
 
-                return render(request, "AppWeb/inicio.html", {"mensaje": f"Bienvenido {usuario}"})
+                return render(request, "AppWeb/home.html", {"mensaje": f"Bienvenido {usuario}"})
             else:
-                return render(request, "AppWeb/inicio.html", {"mensaje": "Datos incorrectos"})
+                return render(request, "AppWeb/home.html", {"mensaje": "Datos incorrectos"})
         else:
-            return render(request, "AppWeb/inicio.html", {"mensaje": "Formulario erroneo"})
+            return render(request, "AppWeb/home.html", {"mensaje": "Formulario erroneo"})
     form = AuthenticationForm()
 
     return render(request, "AppWeb/login.html", {"form": form})
