@@ -28,8 +28,41 @@
     </div>
     <div>
         <h4> Comentarios: </h4>
+        </br>
     </div>
 
+
+    <div>
+        <div>
+
+            {% if comentarios %}
+                {% for comentario in comentarios %}
+
+
+                    <h6>autor: {{comentario.autor}}</h6>
+                    <p>fecha: {{comentario.created}}</p>
+                    <h6>comentario: {{comentario.comentario}}</h6>
+
+                {% endfor %}
+            {% else %}
+
+                <h6>No hay comentarios que mostrar</h6>
+            {% endif %}
+
+            </br>
+            <h6>------------------------------------------</h6>
+            </br>
+
+            <h6>Nuevo Comentario:</h6></br>
+
+            <form action="{% url 'AppLugares:post_detail' post.id %}" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Enviar">
+            </form>
+
+        </div>
+    </div> <!-- end of page container -->
 </div>
 
 {% endblock %}

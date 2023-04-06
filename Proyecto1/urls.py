@@ -16,7 +16,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from AppWeb.views import home, busqueda_usuario, login_request, base, about
+from AppWeb.views import home, busqueda_usuario, login_request, base, about, usuarios
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -27,8 +27,9 @@ urlpatterns = [
     path('home/', home, name="AppWebHome"),
     path('buscar_usuario/', busqueda_usuario, name="AppWebBuscarUsuario"),
     path('login/', login_request, name="Login"),
-    path('AppLugares/', include('AppLugares.urls'))
-
+    path('AppLugares/', include('AppLugares.urls')),
+    path('usuarios/', usuarios, name="AppWebUsuarios"),
 ]
+
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

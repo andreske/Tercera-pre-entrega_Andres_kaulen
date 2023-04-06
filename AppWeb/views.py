@@ -36,7 +36,7 @@ def usuarios(request):
         "form": UsuarioForm(),
         "form_busqueda": BusquedaUsuarioForm(),
     }
-    return render(request, "AppWeb/about.html", context=context)
+    return render(request, "AppWeb/usuarios.html", context=context)
 
 
 def busqueda_usuario(request):
