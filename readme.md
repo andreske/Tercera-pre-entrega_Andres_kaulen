@@ -1,9 +1,13 @@
-En el proyecto se puede ingresar datos para usuarios, direcciones y solicitudes
+Para comenzar se debe:
 
-El formulario de direcciones al poner enviar, arroja error. No pude resolver el motivo. Favor darme feedbak al respecto.
 
-Se puede hacer búsqueda de usuarios por el nombre.
+instalar el modulo pillow con el siguiente comando:
+python -m pip install Pillow
 
-Me pasó que el plugin de gitignore es eliminó de la librería de pychar, por lo que subí todo completo.
+Se debe crear un usuario admin con los siguientes comandos en la consola:
+python manage.py createsuperuser
+Luego se debe agregar usuario, el email puede quedar en blanco, y luego poner contraseña.
 
-Saludos,
+Desde el admin se pueden agregar lugares en cada post.
+
+Para comentarlos se debe ingresar al detalle de cada lugar para luego comentar.

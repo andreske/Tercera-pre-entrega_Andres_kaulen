@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block contenido_cambia %}
+{% load static %}
+
+<!-- page header -->
+    <header class="header">
+        <div class="overlay"></div>
+        <div class="header-content">
+            <h1>Login</h1>
+        </div>
+    </header><!-- end of page header -->
+
+</div>
+
+<div class="container p-4">
+    <div>
+
+        <form action="" method="POST">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit">Iniciar Sesion</button>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

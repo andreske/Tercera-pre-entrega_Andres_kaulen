@@ -1,10 +1,20 @@
 from django.shortcuts import render
-from AppWeb.models import Usuario, Direccion, Solicitud
-from AppWeb.forms import UsuarioForm, DireccionForm, SolicitudForm, BusquedaUsuarioForm
+from AppWeb.models import Usuario
+from AppWeb.forms import UsuarioForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login, logout, authenticate
 
 
 def home(request):
-    return render(request, "index.html")
+    return render(request, "AppWeb/home.html")
+
+
+def base(request):
+    return render(request, "base.html")
+
+
+def about(request):
+    return render(request, "AppWeb/about.html")
 
 
 def usuarios(request):
@@ -23,60 +33,31 @@ def usuarios(request):
     all_usuarios = Usuario.objects.all()
     context = {
         "usuarios": all_usuarios,
-        "form": UsuarioForm(),
-        "form_busqueda": BusquedaUsuarioForm(),
+        "form": UsuarioForm()
     }
     return render(request, "AppWeb/usuarios.html", context=context)
 
 
-def busqueda_usuario(request):
-    mi_formulario = BusquedaUsuarioForm(request.GET)
-    if mi_formulario.is_valid():
-        informacion = mi_formulario.cleaned_data
-        usuarios_filtrados = Usuario.objects.filter(nombre__icontains=informacion['nombre'])
-        context = {
-            "usuarios": usuarios_filtrados
-        }
+def login_request(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
 
-        return render(request, "AppWeb/busqueda_usuario.html", context=context)
+        if form.is_valid():  # Si pasó la validación de Django
 
+            usuario = form.cleaned_data.get('username')
+            contrasenia = form.cleaned_data.get('password')
 
-def direcciones(request):
-    if request.method == "POST":
-        mi_formulario = DireccionForm(request.POST)
+            user = authenticate(username=usuario, password=contrasenia)
 
-        if mi_formulario.is_valid():
-            informacion = mi_formulario.cleaned_data
-            direccion_save = Direccion(
-                calle=informacion['calle'],
-                numero=informacion['numero'],
-                ciudad=informacion['ciudad']
-            )
-            direccion_save.save()
+            if user is not None:
+                login(request, user)
 
-    all_direcciones = Direccion.objects.all()
-    context = {
-        "direcciones": all_direcciones,
-        "form": DireccionForm()
-    }
-    return render(request, "AppWeb/direcciones.html", context=context)
+                return render(request, "AppWeb/home.html", {"mensaje": f"Bienvenido {usuario}"})
+            else:
+                return render(request, "AppWeb/home.html", {"mensaje": "Datos incorrectos"})
+        else:
+            return render(request, "AppWeb/home.html", {"mensaje": "Formulario erroneo"})
+    form = AuthenticationForm()
 
+    return render(request, "AppWeb/login.html", {"form": form})
 
-def solicitudes(request):
-    if request.method == "POST":
-        mi_formulario = SolicitudForm(request.POST)
-
-        if mi_formulario.is_valid():
-            informacion = mi_formulario.cleaned_data
-            solicitud_save = Solicitud(
-                nombre_solicitud=informacion['nombre_solicitud'],
-                cantidad=informacion['cantidad']
-            )
-            solicitud_save.save()
-
-    all_solicitudes = Solicitud.objects.all()
-    context = {
-        "solicitudes": all_solicitudes,
-        "form": SolicitudForm()
-    }
-    return render(request, "AppWeb/solicitudes.html", context=context)

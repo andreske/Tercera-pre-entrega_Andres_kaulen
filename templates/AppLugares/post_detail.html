@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block contenido_cambia %}
+{% load static %}
+
+<div>
+<!-- page header -->
+    <header class="header">
+        <div class="overlay"></div>
+        <div class="header-content">
+            <h1>{{post.lugar}}</h1>
+        </div>
+    </header><!-- end of page header -->
+
+</div>
+
+
+<div class="container p-4">
+    <div class="card card-body">
+        <div class="row">
+            <div class="col-3">
+                <img src="{{post.imagen.url}}" alt="{{post.lugar}}" class="img-fluid">
+            </div>
+            <div class="col-9">
+                <h6>{{post.created}}</h6>
+                <p>{{post.descripcion}}</p>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h4> Comentarios: </h4>
+        </br>
+    </div>
+
+
+    <div>
+        <div>
+
+            {% if comentarios %}
+                {% for comentario in comentarios %}
+
+
+                    <h6>autor: {{comentario.autor}}</h6>
+                    <p>fecha: {{comentario.created}}</p>
+                    <h6>comentario: {{comentario.comentario}}</h6>
+                    <p>-----------------------------------------------</p>
+                {% endfor %}
+            {% else %}
+
+                <h6>No hay comentarios que mostrar</h6>
+            {% endif %}
+
+            </br>
+            <h6>-------------------------------------------------------</h6>
+            </br>
+
+            <h6>Nuevo Comentario:</h6></br>
+
+            <form action="{% url 'AppLugares:post_detail' post.id %}" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Enviar">
+            </form>
+
+        </div>
+    </div> <!-- end of page container -->
+</div>
+
+{% endblock %}
