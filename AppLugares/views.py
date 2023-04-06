@@ -25,7 +25,7 @@ def post_detail(request, post_id):
 
             comentario_save.save()
 
-    all_comentarios = Comentario.objects.all()
+    all_comentarios = Comentario.objects.filter(post_id__icontains=post_id)
     context = {
         "form": ComentarioForm(),
         "post": post,

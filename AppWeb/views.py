@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from AppWeb.models import Usuario
-from AppWeb.forms import UsuarioForm, BusquedaUsuarioForm
+from AppWeb.forms import UsuarioForm
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 
@@ -33,22 +33,9 @@ def usuarios(request):
     all_usuarios = Usuario.objects.all()
     context = {
         "usuarios": all_usuarios,
-        "form": UsuarioForm(),
-        "form_busqueda": BusquedaUsuarioForm(),
+        "form": UsuarioForm()
     }
     return render(request, "AppWeb/usuarios.html", context=context)
-
-
-def busqueda_usuario(request):
-    mi_formulario = BusquedaUsuarioForm(request.GET)
-    if mi_formulario.is_valid():
-        informacion = mi_formulario.cleaned_data
-        usuarios_filtrados = Usuario.objects.filter(nombre__icontains=informacion['nombre'])
-        context = {
-            "usuarios": usuarios_filtrados
-        }
-
-        return render(request, "AppWeb/busqueda_usuario.html", context=context)
 
 
 def login_request(request):

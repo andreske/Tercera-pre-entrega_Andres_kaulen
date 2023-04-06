@@ -21,11 +21,7 @@
                 <input type="submit" value="Enviar">
             </form>
         <br><hr>
-            <form action="{% url 'AppWebBuscarUsuario' %}">
-                {{ form_busqueda.as_p }}
-                <input type="submit" value="Buscar">
-            </form>
-            <br><hr>
+
         {% if usuarios %}
             {% for usuario in usuarios %}
                 <P>nombre: {{ usuario.nombre }}</P>
