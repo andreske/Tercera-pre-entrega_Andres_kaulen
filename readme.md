@@ -11,3 +11,5 @@ Luego se debe agregar usuario, el email puede quedar en blanco, y luego poner co
 Desde el admin se pueden agregar lugares en cada post.
 
 Para comentarlos se debe ingresar al detalle de cada lugar para luego comentar.
+
+el archivo del video quedó subido dentro del proyecto, no se si interfiera en algo. Disculpe.
